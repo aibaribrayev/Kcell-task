@@ -1,56 +1,118 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <div class="bg-light py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mb-0">
-                <a href="{% url 'home' %}">Home</a>
-                <span class="mx-2 mb-0">/</span>
-                <strong class="text-black">Shop</strong>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0">
+        <a href="{% url 'home' %}">Home</a>
+        <span class="mx-2 mb-0">/</span>
+        <strong class="text-black">Shop</strong>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="site-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-9 mb-4">
-                <div class="row mb-5">
-                    {% for product in object_list %}
-                        <div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos='fade-up'>
-                            <figure class="block-4-image">
-                                <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid"></a>
-                            </figure>
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-9 mb-4">
+        <!-- Search form with title and price filter -->
+        <form action="{% url 'cart:product-list' %}" method="GET" class="mb-4">
+          <div class="form-group">
+            <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Search products by title"
+              value="{{ request.GET.search }}"
+              aria-describedby="search-description"
+            />
+            <small id="search-description" class="form-text text-muted">
+              Enter the title or keywords to search for products
+            </small>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input
+                type="number"
+                name="min_price"
+                class="form-control"
+                placeholder="Min Price"
+                value="{{ request.GET.min_price }}"
+                aria-describedby="min-price-description"
+              />
+              <small id="min-price-description" class="form-text text-muted">
+                Enter the minimum price
+              </small>
+            </div>
+            <div class="form-group col-md-6">
+              <input
+                type="number"
+                name="max_price"
+                class="form-control"
+                placeholder="Max Price"
+                value="{{ request.GET.max_price }}"
+                aria-describedby="max-price-description"
+              />
+              <small id="max-price-description" class="form-text text-muted">
+                Enter the maximum price
+              </small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
 
-                            <div class="block-4-text p-4">
-                                <a href="{{ product.get_absolute_url }}">
-                                    <h3>{{ product.title }}</h3>
-                                </a>
-                                <p class="mb-0">{{ product.description }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+        <div class="row mb-5">
+          {% for product in page_obj %}
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos="fade-up">
+            <figure class="block-4-image">
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" class="img-fluid" />
+              </a>
+            </figure>
+
+            <div class="block-4-text p-4">
+              <a href="{{ product.get_absolute_url }}">
+                <h3>{{ product.title }}</h3>
+              </a>
+              <p class="mb-0">{{ product.description }}</p>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="border p-4 rounded mb-4">
-                    <h3 class="h6 text-uppercase text-black">Categories</h3>
-                    <ul>
-                        {% for category in categories %}
-                        <li class="mb-1">
-                            <a href="?category={{ category.name }}" class="d-flex">
-                                <span>{{ category.name }}</span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+          </div>
+          {% endfor %}
         </div>
+
+        <!-- Display pagination links -->
+        <div class="pagination">
+          <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current-page">{{ page_obj.number }}</span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="border p-4 rounded mb-4">
+          <h3 class="h6 text-uppercase text-black">Categories</h3>
+          <ul>
+            {% for category in categories %}
+            <li class="mb-1">
+              <a href="?category={{ category.name }}" class="d-flex">
+                <span>{{ category.name }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock content %}

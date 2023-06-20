@@ -13,6 +13,8 @@ from django.shortcuts import (get_object_or_404, reverse, redirect)
 from django.utils import timezone
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
+
 
 from .forms import (
     AddToCartForm,
@@ -41,18 +43,35 @@ class ProductListView(generic.ListView):
     def get_queryset(self):
         qs = Product.objects.all()
         category = self.request.GET.get('category', None)
-        if not category:
-            return qs
-        return qs.filter(
-            Q(primary_category__name=category) |
-            Q(secondary_categories__name=category)
-        ).distinct()
+        search_query = self.request.GET.get('search', None)
+        min_price = self.request.GET.get('min_price', None)
+        max_price = self.request.GET.get('max_price', None)
 
-    def get_context_data(self, **kwargs) -> Dict[str, Any]:
-        context = super(ProductListView, self).get_context_data(**kwargs)
-        context.update({"categories": Category.objects.values("name")})
+        if category:
+            qs = qs.filter(
+                Q(primary_category__name=category) |
+                Q(secondary_categories__name=category)
+            ).distinct()
+
+        if search_query:
+            qs = qs.filter(title__icontains=search_query)
+
+        if min_price and max_price:
+            qs = qs.filter(price__range=(min_price, max_price))
+
+        return qs
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = context['object_list']
+
+        paginator = Paginator(products, 2)  # Show 2 products per page
+
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context['page_obj'] = page_obj
+
         return context
-
 
 class ProductDetailView(generic.FormView):
     template_name: str = 'cart/product_detail.html'
