@@ -1,0 +1,39 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/code
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=your-secret-key
+      - DEFAULT_FROM_EMAIL=your-email@example.com
+      - NOTIFY_EMAIL=your-email@example.com
+      - PAYPAL_SANDBOX_CLIENT_ID=your-paypal-sandbox-client-id
+      - PAYPAL_SANDBOX_SECRET_KEY=your-paypal-sandbox-secret-key
+      - PAYPAL_LIVE_CLIENT_ID=your-paypal-live-client-id
+      - PAYPAL_LIVE_SECRET_KEY=your-paypal-live-secret-key
+      - STRIPE_PUBLIC_KEY=your-stripe-public-key
+      - STRIPE_SECRET_KEY=your-stripe-secret-key
+      - STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
+      - DB_HOST=db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme

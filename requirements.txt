@@ -20,3 +20,4 @@ urllib3==1.25.10
 gunicorn>=20.1.0
 #gevent>=21.8.0
 pip-tools
+psycopg2>=2.8.6,<2.9
