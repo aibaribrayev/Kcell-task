@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 from .models import (
     Product,
+    ProductImage,
     OrderItem,
     Order,
     ColourVariation,
@@ -41,6 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Order)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductImage)
 admin.site.register(Payment)
 admin.site.register(Category)
 admin.site.register(OrderItem)

@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/aibar/Projects/django_ecommerce/my_env"
+set -gx VIRTUAL_ENV "/Users/aibar/Projects/django_ecomerse2/Kcell-task/my_env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

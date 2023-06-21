@@ -60,11 +60,13 @@ class ProductListView(generic.ListView):
             qs = qs.filter(price__range=(min_price, max_price))
 
         return qs
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = context['object_list']
 
-        paginator = Paginator(products, 2)  # Show 2 products per page
+        paginator = Paginator(products, 5)  # Show 5 products per page
 
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)

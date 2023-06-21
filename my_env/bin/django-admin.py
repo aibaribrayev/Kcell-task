@@ -1,4 +1,4 @@
-#!/Users/aibar/Projects/django_ecommerce/my_env/bin/python3
+#!/Users/aibar/Projects/django_ecomerse2/Kcell-task/my_env/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

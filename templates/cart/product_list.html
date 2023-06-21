@@ -67,7 +67,9 @@
           <div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos="fade-up">
             <figure class="block-4-image">
               <a href="{{ product.get_absolute_url }}">
-                <img src="{{ product.image.url }}" class="img-fluid" />
+                {% for image in product.image.all|slice:":1" %}
+                <img src="{{ image.image.url }}" class="img-fluid" />
+                {% endfor %}
               </a>
             </figure>
 
@@ -80,7 +82,6 @@
           </div>
           {% endfor %}
         </div>
-
         <!-- Display pagination links -->
         <div class="pagination">
           <span class="step-links">

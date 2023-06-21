@@ -62,6 +62,10 @@ class SizeVariation(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to='product_images')
+    def __str__(self):
+        return str(self.image)
 
 class Product(models.Model):
     description = models.TextField()
@@ -71,7 +75,7 @@ class Product(models.Model):
     active = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='product_images')
+    image = models.ManyToManyField(ProductImage)
     available_sizes = models.ManyToManyField(SizeVariation)
     available_colours = models.ManyToManyField(ColourVariation)
     secondary_categories = models.ManyToManyField(to=Category, blank=True)
