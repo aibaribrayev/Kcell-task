@@ -1,3 +1,11 @@
+# Hosted here: http://209.38.249.233:8000/cart/shop/
+
+## super user credentials:
+
+## user name: root
+
+## password: admin
+
 # Django E-commerce.
 
 <p align='center'>
@@ -11,7 +19,6 @@
 <img src="https://img.shields.io/badge/PayPal-000144?logo=paypal&logoColor=white" />
 </p>
 
-
 <hr class="dotted">
 It is an E-commerce system built in Django. It contains all the essentials for adding products and use PayPal and Stripe as payment systems.
 
@@ -24,31 +31,30 @@ The repository is a start point for most of my professional projects; for this, 
 Connect with me at:
 
 <p align='center'>
-    
+
   <a href="https://www.linkedin.com/in/fl4viooliveira/">
     <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>&nbsp;&nbsp;
   <a href="https://stackoverflow.com/users/13045151/">
-    <img src="https://img.shields.io/badge/stackoverflow-%23E4405F.svg?&style=for-the-badge&logo=stackoverflow&logoColor=white" />        
+    <img src="https://img.shields.io/badge/stackoverflow-%23E4405F.svg?&style=for-the-badge&logo=stackoverflow&logoColor=white" />
   </a>&nbsp;&nbsp;
-  
+
 </p>
 
 <p align='center'>
   📫 How to reach me: <a href='mailto:fl4viooliveira@gmail.com'>fl4viooliveira@gmail.com</a>
 </p>
 <p align='center'>
-  <a href="#"><img src="https://badges.pufler.dev/visits/fl4viooliveira/django_ecommerce"></a> 
+  <a href="#"><img src="https://badges.pufler.dev/visits/fl4viooliveira/django_ecommerce"></a>
 </p>
 
 ## Some technical information:
 
-- Django - 3.1.1 
+- Django - 3.1.1
 - Django Allauth - 0.42.0
 - Django Crispy Forms - 1.9.2
 - Django Environ - 0.4.5
 - Stripe - 2.51.0
-
 
 ## To Install:
 
@@ -57,7 +63,7 @@ Cloning the Repository:
 ```
 $ git clone https://github.com/fl4viooliveira/django_ecommerce.git
 
-$ cd django_ecommerce 
+$ cd django_ecommerce
 
 ```
 
@@ -73,11 +79,14 @@ $ virtualenv env
 Activating the environment:
 
 on Windows:
+
 ```
 env\Scripts\activate
 
 ```
+
 on Mac OS / Linux:
+
 ```
 $ source env/bin/activate
 
@@ -90,7 +99,7 @@ $ pip install -r requirements.txt
 
 ```
 
-Create a .env file on ecom folder (/ecom/.env) setting all requirements without using space after "=". 
+Create a .env file on ecom folder (/ecom/.env) setting all requirements without using space after "=".
 
 Copy and paste on our .env file:
 
@@ -117,6 +126,7 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 
 ```
+
 Create a super user:
 
 ```
@@ -152,6 +162,7 @@ Thank you!
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/fl4viooliveira/django_ecommerce/blob/master/LICENSE) file for details.
 
 ## Run for Mac:
+
 ```
 brew install zlib
 brew install bzip2
@@ -161,7 +172,8 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include -I
 ```
 
 ## Todo
- - Add pagination for products page (by 5 items per page)
- - Add search for products (by product title)
- - Add price filter (as range)
- - Auto generate slug (in django admin)
+
+- Add pagination for products page (by 5 items per page)
+- Add search for products (by product title)
+- Add price filter (as range)
+- Auto generate slug (in django admin)
